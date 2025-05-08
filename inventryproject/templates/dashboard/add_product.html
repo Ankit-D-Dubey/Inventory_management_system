@@ -1,0 +1,35 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Product Page {% endblock title %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+ <!--Table-->
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+ <div class="container">
+    <div class="row my-4">
+        <div class="col-md-12">
+            {% for message in messages %}
+            {% if message %}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+            {% endif %}
+            {% endfor %}                
+            <div class="border bg-white p-3">
+                <h4>Add Products</h4>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form | crispy }}<br>
+                    <input class="w-100 btn btn-success btn-block" type="submit" value="Add Product">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endif %}
+{% endblock content %}

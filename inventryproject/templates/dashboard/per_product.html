@@ -1,0 +1,88 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} IMS {% endblock title %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+<br>
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+<div class="container mb-3 mt-3 h-110" style="background-color:white;" >
+<div class="content-section ">
+   <div class="container mb-3 mt-3" style="background-color:white;" >
+    <div class="row mx-auto justify-content-center p-3 my-4">
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center"> Product Name</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fab fa-product-hunt"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.name}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Quantity In Stock</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-warehouse"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.quantity}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Quantity Sold</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-warehouse"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.quantity_sold}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Price Per {{inventory.name}}</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-dollar-sign"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.cost_per_item}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center"> Sales Or Revenue</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-dollar-sign"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.sales}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center"> Stock Date</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.stock_date}}</h3> 
+            </div>
+        </div>
+        <div class="card m-4" style="width:18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center"> Last Sales Date</h5>
+                <div style="font-size:30px;" class="text-center">
+                    <span><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <h3 class="text-center">{{inventory.last_sales_date}}</h3> 
+            </div>
+        </div>
+        <br>
+        <a class="btn btn-danger w-100 mb-3" href="{% url 'dashboard-product-delete' inventory.id %}">Delete Inventory</a>
+    
+    <a class="btn btn-success w-100 " href="{% url 'dashboard-product-update' inventory.id %}">Update Inventory</a>
+    
+    </div>
+    
+    
+</div>
+</div>
+{% endif %}
+{% endblock content %}

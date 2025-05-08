@@ -1,0 +1,42 @@
+{% extends "partials/base.html" %}
+{% block title %} Profile Page {% endblock title %}
+{% block content %}
+
+<div class="container">
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Profile Page
+            </div>
+                    <span class="h4 p-3">Profile information</span class="h4"><hr>
+                        <form class="p-3" method="post" enctype="multipart/form-data"  style='height:550px;' >
+                            {% csrf_token %}
+                            {% for field in user_form %}
+                            {{field.label}} 
+                            <br>
+                            {{field}} 
+                            <br>
+                            {% if field.errors %}  
+                            <div class="alert alert-danger">{{field.errors}}</div>
+                            {% endif %}
+                            {% endfor %} 
+                            {% for field in profile_form %}
+                            {{ field.label}} 
+                            <br>
+                            {{field}} 
+                            <br>
+                            {% if field.errors %}
+                            <div class=" alert alert-danger">{{field.errors}}</div>
+                            {% endif %}
+                        {% endfor %}  <br>
+                        <input class="w-100 btn btn-outline-success" type="submit" value="Update" class="btn btn-success"> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

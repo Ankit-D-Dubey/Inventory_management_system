@@ -1,0 +1,28 @@
+{% extends "partials/base.html" %}
+{% block title %} Order Page {% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% comment %} <div class="container">
+    <div class="row mt-5">
+     <div class="col-sm-6 offset-md-3">
+        <div class="border bg-white p-3"> {% endcomment %}
+            {% if user.is_authenticated and user.is_staff and user.is_superuser %}
+            <div class="container">
+                <div class="row my-4">
+                    <div class="col-md-12">
+                        <div class="border bg-white p-3">
+                <h3>Edit Item </h3>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form | crispy}}
+                    <a class="btn btn-outline-success" href="{% url 'dashboard-product' %}">Cancel</a>
+                    <input type='submit' class="btn btn-success" value="Update" >
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

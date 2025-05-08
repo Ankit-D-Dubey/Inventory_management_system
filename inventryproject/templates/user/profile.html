@@ -1,0 +1,70 @@
+{% extends "partials/base.html" %}
+{% block title %} Profile Page {% endblock title %}
+{% block content %}
+ 
+ <div class="container " style='margin-right:300px;'>
+   
+    <div class="row my-4">
+    <div class="col-md-4"></div> 
+    
+   {% comment %} YE CODE MAINEE CHECK KARNE KE LIYE LIKHA HAI BAS 
+    {{user.username}}
+    {% for use in use %}
+    {{user.username}}
+    {{use.username}}
+    {{use.phone}}
+    <img class="img-thumbnail" src="{{use.image}}" alt="profile-image">
+    <img class="img-thumbnail" src="{{ use.image.url }}" alt="profile-image">
+    {% endfor %} 
+     {% endcomment %}
+    
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                Cutomer Detail Page
+            </div>
+            <div class="row p-3">
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <thead>
+                            <span class="h4">Profile information</span class="h4">
+
+                                <a style="margin-left:200px;" 
+                                class="text-white btn btn-info btn-sm float-right" href="{% url 'user-profile-update' %}">Edit</a>
+                                <hr class="w-500">
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Name</th>
+                                   <td>{{user.username}}</td>  {% comment %}yaha hum ye print kar pa rahe hai bina view me se obj fetch 
+                                                           kiye because humne staff vale property model me user ke saath O-To-O
+                                                            relation build kiya hai to is page me user access kr sakte hai {% endcomment %}
+                                </tr> 
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td>{{user.email}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone</th>
+                                   <td>{{user.profile.phone}}</td>{% comment %}yaha pe user ye parent hai aur profile child ho gaya
+                                                                   to hum phone access kr sakte hai {% endcomment %}
+                                </tr>
+                                <tr>
+                                    <th scope="row">Address</th>
+                                    <td>{{user.profile.address}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <img class="img-thumbnail" src="{{ user.profile.image.url | default:'/media/Profile_images/avatar.jpg' }}" alt="profile-image">
+                        {% comment %} yaha image.url likhte hai because images rendered as a url {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}
+

@@ -1,0 +1,54 @@
+{% load static %}
+<nav style="background-color: #333; color:black;box-shadow:0px 5px 5px;>" class="m-0 navbar-expand ">
+<div class="row m-0">
+  <div class="col-1 m-0">
+  <img src="{% static 'core/images/IMG_20250111_235645.jpg' %}" 
+  style="margin:0px;background-color: #3841420d;height:110px;" class="shadow-lg rounded p-3 m-0">
+  </img>  
+  </div>
+  <div class="col-11  rounded">
+  <h2  style="text-shadow:2px 2px 4px aqua;margin:0;padding:10px;white-space:nowrap;font-size:4vw;color:white;
+  font-family:cursive; margin-left:32px;background-color: #3841420d;" class=" mt-3 navbar-expand ">
+   <center>Inventry Management System </center>
+  </h2>
+  </div>
+</nav>
+<nav  style="background-color: #333; color:black;box-shadow:0px 5px 5px;>" class="m-0 navbar-expand ">
+</center>
+  <div style="margin-left:20px;" class="topnav " id="myTopnav">
+  {% if user.is_authenticated  %}
+    <a  class="navbar-brand text-white" href="{% url 'dashboard-index' %}">Home Inventory</a>
+    {% if user.is_superuser  %}
+    <a style="margin-left:5px;" class="nav-link " style="" href="{% url 'dashboard-index' %}">Dashboard </a>
+    <a style="margin-left:5px;" class="nav-link " style="" href="{% url 'add_product' %}">Add Inventory </a>
+     {% comment %} <a style="margin-left:5px;" class="nav-link " style="{% url 'admin-panel' %}" href="admin">Admin Panel </a>  {% endcomment %}
+    {% endif %}
+    <a style="margin-left:5px;" class="nav-link " href="{% url 'user-profile'  %}">
+      {{user.username | capfirst}} 
+      Profile</a>
+       
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+    <a><button style="margin-left:5px;" class="nav-link text-white loghov" type="submit" >Logout</button>
+      </a>
+    </form>
+    {% endif %}
+    {% if not user.is_authenticated %}
+    <a style="margin-left:5px;" class="nav-link " href="{% url 'user-register'  %}"> Register</a>
+    <a href="{% url 'user-login' %}"><button style="margin-left:5px;" class="nav-link text-white" type="submit" >Login</button></a>
+    {% endif %}
+    <a  href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+</nav>
+  <script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+  </script>

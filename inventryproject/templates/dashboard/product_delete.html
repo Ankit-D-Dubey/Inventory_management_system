@@ -1,0 +1,27 @@
+{% extends "partials/base.html" %}
+{% block title %} Order Page {% endblock title %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+<div class="container">
+    <div class="row mt-5">
+     <div class="col-sm-6 offset-md-3">
+        <div class="border bg-white p-3">
+                <h3>Delete Item </h3>
+                <hr>
+                <div class="alert alert-danger">
+                    <h4>Are you sure you want to delete ?</h4>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <a class="btn btn-outline-success" href="{% url 'dashboard-product' %}">Cancel</a>
+                    <input type='submit' class="btn btn-outline-danger" value="Confirm" >
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "partials/base.html" %}
+{% block title %} Login Page {% endblock title %}
+{% block content %}
+<br>
+<div class="container" >
+    <div class="row my-3">
+     <div class="col-sm-6  offset-sm-3">
+        
+        {% for message in messages  %}
+        {% if message %}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+        {% endif %}
+        {% endfor %}            
+                <form style="background-color:white;" class="shadow-lg p-5" method="POST">
+                    <h3>Login Page </h3><hr>
+                 {% csrf_token %}
+                {% for fm in form %}
+                <div class="form-group">
+                    {{fm.label_tag}}  {{fm}} <br>
+                </div> 
+                {% endfor %}
+                <input class="w-100 btn btn-success" type="submit" value="Login" class="btn btn-success"><br>
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>    
+                {% endfor %}
+                {% endif %}
+                <br>
+                <div class='p-1 mb-1'>
+                <a  style="margin-left:0px;margin-top:3px;" href="{% url 'password_reset' %}">Forget Password ? </a>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+
